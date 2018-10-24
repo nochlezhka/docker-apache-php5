@@ -26,7 +26,9 @@ RUN apt-get update && \
     sed -i 's|^;date.timezone.*|date.timezone = Europe/Moscow|' /etc/php5/cli/php.ini && \
     echo "apc.shm_size=64M" >> /etc/php5/mods-available/apcu.ini && \
     ln -snf /usr/share/zoneinfo/Europe/Moscow /etc/localtime && echo "Europe/Moscow" > /etc/timezone && \
-    mv /etc/apache2 /etc/apache2-orig
+    mv /etc/apache2 /etc/apache2-orig && \
+    apt-get clean -y && apt-get autoclean -y && apt-get autoremove -y && \
+    rm -rf /var/cache/debconf/*-old && rm -rf /var/lib/apt/lists/* && rm -rf /usr/share/doc/*
 
 ADD apache2-prefork.conf /etc/apache2-orig/mods-available/mpm_prefork.conf
 
