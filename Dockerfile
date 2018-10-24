@@ -5,8 +5,8 @@ ADD start.sh /root/start.sh
 RUN apt-get update && \
     apt-get install apache2 -y && \
     systemctl enable apache2 && \
-    echo "SetEnv PROJECT_RUN_MODE develop" >> /etc/apache2/apache2.conf && \
-    echo "PROJECT_RUN_MODE=develop" >> /etc/environment && \
+    echo "SetEnv PROJECT_RUN_MODE docker" >> /etc/apache2/apache2.conf && \
+    echo "PROJECT_RUN_MODE=docker" >> /etc/environment && \
     sed -i 's|^ServerTokens.*|ServerTokens Prod|' /etc/apache2/conf-available/security.conf && \
     sed -i 's|^ServerSignature.*|ServerSignature Off|' /etc/apache2/conf-available/security.conf && \
     ln -s /etc/apache2/mods-available/headers.load /etc/apache2/mods-enabled/headers.load && \
@@ -37,4 +37,4 @@ CMD ["/bin/bash", "/root/start.sh"]
 
 EXPOSE 80 443
 
-VOLUME ["/var/www", "/etc/apache2", "/home/log"]
+VOLUME ["/var/www", "/etc/apache2", "/var/log/apache2"]
