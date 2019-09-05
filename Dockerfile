@@ -24,6 +24,9 @@ RUN apt-get update && \
     sed -i 's|^;error_log.*|error_log = /var/log/php_cli_errors.log|' /etc/php5/cli/php.ini && \
     sed -i 's|^error_reporting.*|error_reporting = E_ALL \& ~E_DEPRECATED \& ~E_NOTICE \& ~E_STRICT|' /etc/php5/cli/php.ini && \
     sed -i 's|^;date.timezone.*|date.timezone = Europe/Moscow|' /etc/php5/cli/php.ini && \
+    sed -i 's|^;mbstring.func_overload = 0|mbstring.func_overload = 2|' /etc/php5/cli/php.ini && \
+    sed -i 's|^;mbstring.internal_encoding*|mbstring.internal_encoding = ""|' /etc/php5/cli/php.ini && \
+    sed -i 's|^;default_charset = *|default_charset = "utf-8"|' /etc/php5/cli/php.ini && \
     echo "apc.shm_size=64M" >> /etc/php5/mods-available/apcu.ini && \
     ln -snf /usr/share/zoneinfo/Europe/Moscow /etc/localtime && echo "Europe/Moscow" > /etc/timezone && \
     mv /etc/apache2 /etc/apache2-orig && \
