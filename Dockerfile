@@ -27,6 +27,10 @@ RUN apt-get update && \
     sed -i 's|^;mbstring.func_overload = 0|mbstring.func_overload = 2|' /etc/php5/cli/php.ini && \
     sed -i 's|^;mbstring.func_overload = 0|mbstring.func_overload = 2|' /etc/php5/apache2/php.ini && \
     sed -i 's|^;mbstring.internal_encoding*|mbstring.internal_encoding = ""|' /etc/php5/cli/php.ini && \
+    sed -i 's|^upload_max_filesize = 2M|upload_max_filesize = 512M|' /etc/php5/cli/php.ini && \
+    sed -i 's|^upload_max_filesize = 2M|upload_max_filesize = 512M|' /etc/php5/apache2/php.ini && \
+    sed -i 's|^post_max_size = 8M|post_max_size = 512M|' /etc/php5/cli/php.ini && \
+    sed -i 's|^post_max_size = 8M|post_max_size = 512M|' /etc/php5/apache2/php.ini && \
     sed -i 's|^;default_charset = *|default_charset = "utf-8"|' /etc/php5/cli/php.ini && \
     echo "apc.shm_size=64M" >> /etc/php5/mods-available/apcu.ini && \
     ln -snf /usr/share/zoneinfo/Europe/Moscow /etc/localtime && echo "Europe/Moscow" > /etc/timezone && \
